@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        int n = nums.size(), i, exor = nums[0], bit = 0, temp;
+        vector<int> v(2);
+        for(i = 1; i < n; i++)
+            exor ^= nums[i];
+        while(!(exor & (1 << bit)))
+            bit++;
+        temp = 1 << bit;
+        for(i = 0; i < n; i++){
+            if(temp & nums[i])
+                v[0] ^= nums[i];
+            else
+                v[1] ^= nums[i];
+        }
+        return v;
+    }
+};
